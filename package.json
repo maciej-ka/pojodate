@@ -1,0 +1,16 @@
+{
+  "name": "pojodate",
+  "version": "0.1.0",
+  "description": "JS Date library made for developer experience",
+  "main": "pojodate.js",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "keywords": [],
+  "author": "Maciej Kasprzyk <maciej.kasprzyk.it@gmail.com> (https://github.com/maciej-ka)",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  }
+}
