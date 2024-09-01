@@ -1,9 +1,18 @@
 import { describe, expect, it } from 'vitest'
+import PojoDate from './pojodate';
+
+// 2016-01-14
+// 2017-09-02
+// 2020-02-23
+// 2024-04-03
 
 describe('chains', () => {
-  it('works', () => {
-    const actual = 1;
-    expect(actual).toEqual(1);
+  it('add, set and format', () => {
+    const actual = new PojoDate('2016-01-14')
+      .add({ months: 1 })
+      .set({ days: 1 })
+      .format(pojo => `${pojo.years}, ${pojo.months}, ${pojo.days}`);
+    expect(actual).toEqual('2016, 02, 01');
   });
 });
 

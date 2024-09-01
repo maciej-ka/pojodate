@@ -1,5 +1,17 @@
+class PojoDate extends Date {
+  format(arg0: any) {
+    return "test"
+  }
 
+  set(arg0: { days: number; }) {
+    return this;
+  }
 
+  add(arg0: { months: number; }) {
+    return this;
+  }
+}
+export default PojoDate;
 
 
 
