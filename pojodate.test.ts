@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import PojoDate from "./pojodate";
 
-// 2024-03-04 19:03:00
 // 2017-09-02 15:20:00
 // 2020-02-23 14:59:00
 // 2016-01-14 08:39:00
+// 2024-03-04 19:03:00
 
 describe("get pojo", () => {
   it("on correct date", () => {
@@ -48,68 +48,20 @@ describe("set", () => {
   })
 })
 
-// describe('chains', () => {
-//   it('add, set and format', () => {
-//     const actual = new PojoDate('2016-01-14')
-//       .add({ months: 1 })
-//       .set({ days: 1 })
-//       .format(pojo => `${pojo.years}, ${pojo.months}, ${pojo.days}`);
-//     expect(actual).toEqual('2016, 02, 01');
-//   });
-// });
+describe('format', () => {
+  it('works', () => {
+    const actual = new PojoDate("2017-09-02 15:20:00").format(pojo => `${pojo.days},${pojo.months},${pojo.years}`);
+    expect(actual).toEqual("02,09,2017");
+  });
+});
 
-// import { describe, expect, it } from "vitest";
-//
-// import pojotime from './pojotime';
-// pojotime();
-//
-// describe('pojotime to build pojo', () => {
-//   it('works', () => {
-//     const actual = new Date('2023-08-20 12:20:30').pojo;
-//     expect(actual.years).toEqual(2023);
-//     expect(actual.months).toEqual(8);
-//     expect(actual.days).toEqual(20);
-//     expect(actual.hours).toEqual(12);
-//     expect(actual.minutes).toEqual(20);
-//     expect(actual.seconds).toEqual(30);
-//   });
-// });
-//
-// describe('pojotime update with diff function', () => {
-//   it('next day', () => {
-//     const actual = new Date('2023-08-20 12:20:30').pojo.update((pojo) => ({
-//       days: pojo.days + 1,
-//     }));
-//     expect(actual).toEqual(new Date('2023-08-21 12:20:30'));
-//   });
-//
-//   it('first day of month', () => {
-//     const actual = new Date('2023-08-20 12:20:30').pojo.update({ days: 1 });
-//     expect(actual).toEqual(new Date('2023-08-01 12:20:30'));
-//   });
-//
-//   it('last day of month', () => {
-//     const actual = new Date('2023-08-20 12:20:30').pojo.update((pojo) => ({
-//       months: pojo.months + 1,
-//       days: 0,
-//     }));
-//     expect(actual).toEqual(new Date('2023-08-31 12:20:30'));
-//   });
-//
-//   it('last day of previous month', () => {
-//     const actual = new Date('2023-08-20 12:20:30').pojo.update({
-//       days: 0,
-//     });
-//     expect(actual).toEqual(new Date('2023-07-31 12:20:30'));
-//   });
-//
-//   it('one day before last day of previous month', () => {
-//     const actual = new Date('2023-08-20 12:20:30').pojo.update({ days: -1 });
-//     expect(actual).toEqual(new Date('2023-07-30 12:20:30'));
-//   });
-//
-//   it('20th day of this month', () => {
-//     const actual = new Date('2023-08-20 12:20:30').pojo.update({ days: 20 });
-//     expect(actual).toEqual(new Date('2023-08-20 12:20:30'));
-//   });
-// });
+describe('chains', () => {
+  it('add, set and format', () => {
+    const actual = new PojoDate('2016-01-14')
+      .add({ months: 1 })
+      .set({ days: 1 })
+      .format(pojo => `${pojo.years}, ${pojo.months}, ${pojo.days}`);
+    expect(actual).toEqual('2016, 02, 01');
+  });
+});
+
