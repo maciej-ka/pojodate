@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import PojoDate from "./pojodate";
 
-// 2016-01-14 08:39:00
 // 2024-03-04 19:03:00
 // 2017-09-02 15:20:00
 // 2020-02-23 14:59:00
+// 2016-01-14 08:39:00
 
 describe("get pojo", () => {
   it("on correct date", () => {
@@ -40,6 +40,13 @@ describe('add', () => {
     expect(actual).toEqual(new Date("2017-01-14 08:39:00"));
   });
 });
+
+describe("set", () => {
+  it("day", () => {
+    const actual = new PojoDate("2024-03-04 19:03:00").set({ days: 1 });
+    expect(actual).toEqual(new Date("2024-03-01 19:03:00"));
+  })
+})
 
 // describe('chains', () => {
 //   it('add, set and format', () => {

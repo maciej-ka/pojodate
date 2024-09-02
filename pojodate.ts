@@ -60,12 +60,14 @@ class PojoDate extends Date {
     });
   }
 
+  set(arg: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): PojoDate {
+    const _current = this.pojo();
+    const pojo = typeof arg === "function" ? arg(_current) : arg;
+    return new PojoDate({ ..._current, ...pojo });
+  }
+
   // format(arg0: any) {
   //   return "test";
-  // }
-  //
-  // set(arg0: { days: number }) {
-  //   return this;
   // }
 }
 
