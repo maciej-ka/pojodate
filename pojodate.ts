@@ -7,10 +7,6 @@ type Pojo = {
   seconds: number;
 };
 
-// function isPojo(arg: any): arg is Pojo {
-//   return arg?.years
-// }
-
 class PojoDate extends Date {
   pojo(): Pojo {
     return {
@@ -23,29 +19,23 @@ class PojoDate extends Date {
     };
   }
 
-  // new Date()
-  // new Date(value)
-  // new Date(dateString)
-  // new Date(dateObject)
-  // new Date(year, monthIndex)
-  // new Date(year, monthIndex, day)
-  // new Date(year, monthIndex, day, hours)
-  // new Date(year, monthIndex, day, hours, minutes)
-  // new Date(year, monthIndex, day, hours, minutes, seconds)
-  // new Date(year, monthIndex, day, hours, minutes, seconds, milliseconds)
-  // TODO type
-  constructor(args) {
-    if (args?.years) {
+  constructor()
+  constructor(string: string)
+  constructor(date: Date)
+  constructor(year: number, month: number, date?: number, hours?: number, minutes?: number, seconds?: number, ms?: number);
+  constructor(pojo: Pick<Pojo, "years"> & Partial<Pojo>)
+  constructor(...args: any[]) {
+    if (args[0]?.years) {
       super(
-        args.years,
-        args.months ? args.months - 1 : 0,
-        args.days || 1,
-        args.hours || 0,
-        args.minutes || 0,
-        args.seconds || 0,
+        args[0].years,
+        args[0].months ? args[0].months - 1 : 0,
+        args[0].days || 1,
+        args[0].hours || 0,
+        args[0].minutes || 0,
+        args[0].seconds || 0,
       )
     } else {
-      super(args)
+      super(...args as [any])
     }
   }
 
