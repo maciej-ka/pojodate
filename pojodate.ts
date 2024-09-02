@@ -19,11 +19,19 @@ class PojoDate extends Date {
     };
   }
 
-  constructor()
-  constructor(string: string)
-  constructor(date: Date)
-  constructor(year: number, month: number, date?: number, hours?: number, minutes?: number, seconds?: number, ms?: number);
-  constructor(pojo: Pick<Pojo, "years"> & Partial<Pojo>)
+  constructor();
+  constructor(string: string);
+  constructor(date: Date);
+  constructor(
+    year: number,
+    monthIndex: number,
+    day?: number,
+    hours?: number,
+    minutes?: number,
+    seconds?: number,
+    miliseconds?: number
+  );
+  constructor(pojo: Pick<Pojo, "years"> & Partial<Pojo>);
   constructor(...args: any[]) {
     if (args[0]?.years) {
       super(
@@ -32,16 +40,25 @@ class PojoDate extends Date {
         args[0].days || 1,
         args[0].hours || 0,
         args[0].minutes || 0,
-        args[0].seconds || 0,
-      )
+        args[0].seconds || 0
+      );
     } else {
-      super(...args as [any])
+      super(...(args as [any]));
     }
   }
 
-  // add(pojo: Pojo) {
-  //   return this;
-  // }
+  add(arg: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): PojoDate {
+    const _current = this.pojo();
+    const pojo = typeof arg === "function" ? arg(_current) : arg;
+    return new PojoDate({
+      years: _current.years + (pojo.years || 0),
+      months: _current.months + (pojo.months || 0),
+      days: _current.days + (pojo.days || 0),
+      hours: _current.hours + (pojo.hours || 0),
+      minutes: _current.minutes + (pojo.minutes || 0),
+      seconds: _current.seconds + (pojo.seconds || 0),
+    });
+  }
 
   // format(arg0: any) {
   //   return "test";
@@ -53,33 +70,6 @@ class PojoDate extends Date {
 }
 
 export default PojoDate;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // type PojoData = {
 //   years: number;

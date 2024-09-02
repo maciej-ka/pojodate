@@ -34,12 +34,12 @@ describe("constructor", () => {
   });
 });
 
-// describe('add', () => {
-//   it('year', () => {
-//     const actual = new PojoDate("2016-01-14 08:39:00").add({ years: 1 });
-//     expect(actual).toEqual(new Date("2017-01-14 08:39:00"));
-//   });
-// });
+describe('add', () => {
+  it('year', () => {
+    const actual = new PojoDate("2016-01-14 08:39:00").add({ years: 1 });
+    expect(actual).toEqual(new Date("2017-01-14 08:39:00"));
+  });
+});
 
 // describe('chains', () => {
 //   it('add, set and format', () => {
