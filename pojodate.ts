@@ -1,17 +1,51 @@
+type Pojo = {
+  years: number;
+  months: number;
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
+
 class PojoDate extends Date {
-  format(arg0: any) {
-    return "test"
+  pojo(): Pojo {
+    return {
+      years: this.getFullYear(),
+      months: this.getMonth() + 1,
+      days: this.getDate(),
+      hours: this.getHours(),
+      minutes: this.getMinutes(),
+      seconds: this.getSeconds(),
+    };
   }
 
-  set(arg0: { days: number; }) {
-    return this;
-  }
+  // add(pojo: Pojo) {
+  //   return this;
+  // }
 
-  add(arg0: { months: number; }) {
-    return this;
-  }
+  // format(arg0: any) {
+  //   return "test";
+  // }
+  //
+  // set(arg0: { days: number }) {
+  //   return this;
+  // }
 }
+
 export default PojoDate;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
