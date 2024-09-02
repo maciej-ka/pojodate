@@ -7,7 +7,7 @@ import PojoDate from "./pojodate";
 // 2020-02-23 14:59:00
 
 describe("get pojo", () => {
-  it("works", () => {
+  it("on correct date", () => {
     const actual = new PojoDate("2020-02-23 14:59:00").pojo();
     expect(actual).toMatchObject({
       years: 2020,
@@ -17,6 +17,20 @@ describe("get pojo", () => {
       minutes: 59,
       seconds: 0,
     });
+  });
+});
+
+describe("constructor", () => {
+  it("with pojo", () => {
+    const actual = new PojoDate({
+      years: 2024,
+      months: 3,
+      days: 4,
+      hours: 19,
+      minutes: 3,
+      seconds: 0,
+    });
+    expect(actual.getTime()).toEqual(new Date("2024-03-04 19:03:00").getTime());
   });
 });
 
@@ -36,31 +50,6 @@ describe("get pojo", () => {
 //     expect(actual).toEqual('2016, 02, 01');
 //   });
 // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import { describe, expect, it } from "vitest";
 //

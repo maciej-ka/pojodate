@@ -7,6 +7,10 @@ type Pojo = {
   seconds: number;
 };
 
+// function isPojo(arg: any): arg is Pojo {
+//   return arg?.years
+// }
+
 class PojoDate extends Date {
   pojo(): Pojo {
     return {
@@ -17,6 +21,32 @@ class PojoDate extends Date {
       minutes: this.getMinutes(),
       seconds: this.getSeconds(),
     };
+  }
+
+  // new Date()
+  // new Date(value)
+  // new Date(dateString)
+  // new Date(dateObject)
+  // new Date(year, monthIndex)
+  // new Date(year, monthIndex, day)
+  // new Date(year, monthIndex, day, hours)
+  // new Date(year, monthIndex, day, hours, minutes)
+  // new Date(year, monthIndex, day, hours, minutes, seconds)
+  // new Date(year, monthIndex, day, hours, minutes, seconds, milliseconds)
+  // TODO type
+  constructor(args) {
+    if (args?.years) {
+      super(
+        args.years,
+        args.months ? args.months - 1 : 0,
+        args.days || 1,
+        args.hours || 0,
+        args.minutes || 0,
+        args.seconds || 0,
+      )
+    } else {
+      super(args)
+    }
   }
 
   // add(pojo: Pojo) {
