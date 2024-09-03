@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import PojoDate from "./pojodate";
 
-// Jaga
 // Brun
 // Gniewo
 // Zu
+// Jaga
 
 // 2016-01-14 08:39:00
 // 2017-09-02 15:20:00
@@ -84,3 +84,10 @@ describe("chains", () => {
   });
 });
 
+describe("interval", () => {
+  it("works", () => {
+    const date = new PojoDate("2024-03-04 19:03:00")
+    const actual = date.interval("2017-09-02 15:20:00");
+    expect(actual).toEqual({ years: 6, months: 7, days: 5, hours: 4, minutes: 43, seconds: 0 });
+  });
+});

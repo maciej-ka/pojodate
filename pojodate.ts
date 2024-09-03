@@ -49,7 +49,14 @@ class PojoDate extends Date {
 
   toDate(): Date {
     const pojo = this.pojo();
-    return new Date(pojo.years, pojo.months - 1, pojo.days, pojo.hours, pojo.minutes, pojo.seconds);
+    return new Date(
+      pojo.years,
+      pojo.months - 1,
+      pojo.days,
+      pojo.hours,
+      pojo.minutes,
+      pojo.seconds
+    );
   }
 
   add(arg: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): PojoDate {
@@ -71,23 +78,62 @@ class PojoDate extends Date {
     return new PojoDate({ ..._current, ...pojo });
   }
 
-  format(fn: (current: {[K in keyof Pojo]: string}) => string): string {
+  format(fn: (current: { [K in keyof Pojo]: string }) => string): string {
     const _current = this.pojo();
-    const pad = (arg: number) => arg.toString().padStart(2, '0');
+    const pad = (arg: number) => arg.toString().padStart(2, "0");
     return fn({
       years: _current.years.toString(),
       months: pad(_current.months),
       days: pad(_current.days),
       hours: pad(_current.hours),
       minutes: pad(_current.minutes),
-      seconds: pad(_current.seconds)
+      seconds: pad(_current.seconds),
     });
   }
 
   formatIso(parts: "full" | "date" | "time" = "full"): string {
-    if (parts === "full") return this.format(d => `${d.years}-${d.months}-${d.days} ${d.hours}:${d.minutes}:${d.seconds}`)
-    if (parts === "date") return this.format(d => `${d.years}-${d.months}-${d.days}`)
-    return this.format(d => `${d.hours}:${d.minutes}:${d.seconds}`)
+    if (parts === "full")
+      return this.format(
+        (d) =>
+          `${d.years}-${d.months}-${d.days} ${d.hours}:${d.minutes}:${d.seconds}`
+      );
+    if (parts === "date")
+      return this.format((d) => `${d.years}-${d.months}-${d.days}`);
+    return this.format((d) => `${d.hours}:${d.minutes}:${d.seconds}`);
+  }
+
+  interval(): Pojo;
+  interval(string: string): Pojo;
+  interval(date: Date): Pojo;
+  interval(
+    year: number,
+    monthIndex: number,
+    day?: number,
+    hours?: number,
+    minutes?: number,
+    seconds?: number,
+    miliseconds?: number
+  ): Pojo;
+  interval(pojo: Pick<Pojo, "years"> & Partial<Pojo>): Pojo;
+  interval(...args: any[]): Pojo {
+    const diff = this.getTime() - new PojoDate(...(args as [any])).getTime();
+    let years: number;
+    let months: number;
+    let days: number;
+    let hours: number;
+    let minutes: number;
+    let seconds: number;
+    const calc = (value: number, divisor: number) => [
+      Math.floor(value / divisor),
+      value % divisor,
+    ];
+    [seconds] = calc(Math.abs(diff), 1000);
+    [minutes, seconds] = calc(seconds, 60);
+    [hours, minutes] = calc(minutes, 60);
+    [days, hours] = calc(hours, 24);
+    [months, days] = calc(days, 30);
+    [years, months] = calc(months, 12);
+    return { years, months, days, hours, minutes, seconds };
   }
 }
 
