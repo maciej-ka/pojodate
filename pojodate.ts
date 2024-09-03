@@ -78,6 +78,12 @@ class PojoDate extends Date {
       seconds: pad(_current.seconds)
     });
   }
+
+  formatIso(parts: "full" | "date" | "time" = "full") {
+    if (parts === "full") return this.format(d => `${d.years}-${d.months}-${d.days} ${d.hours}:${d.minutes}:${d.seconds}`)
+    if (parts === "date") return this.format(d => `${d.years}-${d.months}-${d.days}`)
+    if (parts === "time") return this.format(d => `${d.hours}:${d.minutes}:${d.seconds}`)
+  }
 }
 
 export default PojoDate;
