@@ -7,6 +7,18 @@ type Pojo = {
   seconds: number;
 };
 
+function add(current: Pojo, arg: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): Pojo {
+  const pojo = typeof arg === "function" ? arg(current) : arg;
+  return {
+    years: current.years + (pojo.years || 0),
+    months: current.months + (pojo.months || 0),
+    days: current.days + (pojo.days || 0),
+    hours: current.hours + (pojo.hours || 0),
+    minutes: current.minutes + (pojo.minutes || 0),
+    seconds: current.seconds + (pojo.seconds || 0),
+  }
+}
+
 class PojoDate extends Date {
   pojo(): Pojo {
     return {
@@ -60,16 +72,7 @@ class PojoDate extends Date {
   }
 
   add(arg: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): PojoDate {
-    const _current = this.pojo();
-    const pojo = typeof arg === "function" ? arg(_current) : arg;
-    return new PojoDate({
-      years: _current.years + (pojo.years || 0),
-      months: _current.months + (pojo.months || 0),
-      days: _current.days + (pojo.days || 0),
-      hours: _current.hours + (pojo.hours || 0),
-      minutes: _current.minutes + (pojo.minutes || 0),
-      seconds: _current.seconds + (pojo.seconds || 0),
-    });
+    return new PojoDate(add(this.pojo(), arg));
   }
 
   set(arg: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): PojoDate {
@@ -92,13 +95,8 @@ class PojoDate extends Date {
   }
 
   formatIso(parts: "full" | "date" | "time" = "full"): string {
-    if (parts === "full")
-      return this.format(
-        (d) =>
-          `${d.years}-${d.months}-${d.days} ${d.hours}:${d.minutes}:${d.seconds}`
-      );
-    if (parts === "date")
-      return this.format((d) => `${d.years}-${d.months}-${d.days}`);
+    if (parts === "full") return this.format((d) => `${d.years}-${d.months}-${d.days} ${d.hours}:${d.minutes}:${d.seconds}`);
+    if (parts === "date") return this.format((d) => `${d.years}-${d.months}-${d.days}`);
     return this.format((d) => `${d.hours}:${d.minutes}:${d.seconds}`);
   }
 
