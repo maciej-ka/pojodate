@@ -1,4 +1,6 @@
-type Pojo = {
+import PojoDiff from "./pojodiff";
+
+export interface Pojo {
   years: number;
   months: number;
   days: number;
@@ -7,7 +9,7 @@ type Pojo = {
   seconds: number;
 };
 
-function add(current: Pojo, arg: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): Pojo {
+export function add(current: Pojo, arg: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): Pojo {
   const pojo = typeof arg === "function" ? arg(current) : arg;
   return {
     years: current.years + (pojo.years || 0),
@@ -100,9 +102,9 @@ class PojoDate extends Date {
     return this.format((d) => `${d.hours}:${d.minutes}:${d.seconds}`);
   }
 
-  interval(): Pojo;
-  interval(string: string): Pojo;
-  interval(date: Date): Pojo;
+  interval(): PojoDiff;
+  interval(string: string): PojoDiff;
+  interval(date: Date): PojoDiff;
   interval(
     year: number,
     monthIndex: number,
@@ -111,9 +113,9 @@ class PojoDate extends Date {
     minutes?: number,
     seconds?: number,
     miliseconds?: number
-  ): Pojo;
-  interval(pojo: Pick<Pojo, "years"> & Partial<Pojo>): Pojo;
-  interval(...args: any[]): Pojo {
+  ): PojoDiff;
+  interval(pojo: Pick<Pojo, "years"> & Partial<Pojo>): PojoDiff;
+  interval(...args: any[]): PojoDiff {
     const diff = this.getTime() - new PojoDate(...(args as [any])).getTime();
     let years: number;
     let months: number;
@@ -131,7 +133,7 @@ class PojoDate extends Date {
     [days, hours] = calc(hours, 24);
     [months, days] = calc(days, 30);
     [years, months] = calc(months, 12);
-    return { years, months, days, hours, minutes, seconds };
+    return new PojoDiff({ years, months, days, hours, minutes, seconds });
   }
 }
 
