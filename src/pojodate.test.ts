@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import PojoDate from "./pojodate";
+import PojoDate from './pojodate';
 
 // Brun
 // Gniewo

@@ -1,4 +1,4 @@
-import { add, Pojo } from "./pojodate";
+import { Pojo, add } from './pojo';
 
 class PojoDiff implements Pojo {
   years: number;
