@@ -96,7 +96,6 @@ describe("interval", () => {
     const interval1 = date1.interval("2017-09-02 15:20:00");
     const date2 = new PojoDate("2016-01-14 08:39:00")
     const interval2 = date2.interval("2020-02-23 14:59:00");
-    // TODO: fix missing overflow (in minutes)
-    expect(interval1.add(interval2)).toMatchObject({ years: 10, months: 9, days: 6, hours: 10, minutes: 63, seconds: 0 });
+    expect(interval1.add(interval2)).toMatchObject({ years: 10, months: 9, days: 6, hours: 11, minutes: 3, seconds: 0 });
   })
 });

@@ -96,24 +96,8 @@ class PojoDate extends Date {
   ): PojoDiff;
   interval(pojo: Pick<Pojo, "years"> & Partial<Pojo>): PojoDiff;
   interval(...args: any[]): PojoDiff {
-    const diff = this.getTime() - new PojoDate(...(args as [any])).getTime();
-    let years: number;
-    let months: number;
-    let days: number;
-    let hours: number;
-    let minutes: number;
-    let seconds: number;
-    const calc = (value: number, divisor: number) => [
-      Math.floor(value / divisor),
-      value % divisor,
-    ];
-    [seconds] = calc(Math.abs(diff), 1000);
-    [minutes, seconds] = calc(seconds, 60);
-    [hours, minutes] = calc(minutes, 60);
-    [days, hours] = calc(hours, 24);
-    [months, days] = calc(days, 30);
-    [years, months] = calc(months, 12);
-    return new PojoDiff({ years, months, days, hours, minutes, seconds });
+    const diff = this.getTime() - new PojoDate(...args as [any]).getTime();
+    return new PojoDiff(diff);
   }
 }
 
