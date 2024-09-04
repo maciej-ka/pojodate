@@ -16,15 +16,7 @@ class PojoDate extends Date {
   constructor();
   constructor(string: string);
   constructor(date: Date);
-  constructor(
-    year: number,
-    monthIndex: number,
-    day?: number,
-    hours?: number,
-    minutes?: number,
-    seconds?: number,
-    miliseconds?: number
-  );
+  constructor(year: number, monthIndex: number, day?: number, hours?: number, minutes?: number, seconds?: number, miliseconds?: number);
   constructor(pojo: Pick<Pojo, "years"> & Partial<Pojo>);
   constructor(...args: any[]) {
     if (args[0]?.years) {
@@ -85,15 +77,7 @@ class PojoDate extends Date {
   interval(): PojoDiff;
   interval(string: string): PojoDiff;
   interval(date: Date): PojoDiff;
-  interval(
-    year: number,
-    monthIndex: number,
-    day?: number,
-    hours?: number,
-    minutes?: number,
-    seconds?: number,
-    miliseconds?: number
-  ): PojoDiff;
+  interval(year: number, monthIndex: number, day?: number, hours?: number, minutes?: number, seconds?: number, miliseconds?: number): PojoDiff;
   interval(pojo: Pick<Pojo, "years"> & Partial<Pojo>): PojoDiff;
   interval(...args: any[]): PojoDiff {
     const diff = this.getTime() - new PojoDate(...args as [any]).getTime();

@@ -1,4 +1,4 @@
-import { Pojo, add, toMiliseconds } from './pojo';
+import { Pojo, add, toMiliseconds } from "./pojo";
 
 class PojoDiff implements Pojo {
   years: number;
@@ -21,10 +21,9 @@ class PojoDiff implements Pojo {
     [this.years, this.months] = calc(this.months, 12);
   }
 
-
   add(arg: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): PojoDiff {
     return new PojoDiff(toMiliseconds(add(this, arg)));
   }
 }
 
-export default PojoDiff
+export default PojoDiff;
