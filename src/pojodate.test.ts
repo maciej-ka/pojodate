@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import PojoDate from './pojodate';
 
-// Gniewo
 // Zu
 // Jaga
 // Brun
+// Gniewo
 
 // 2016-01-14 08:39:00
 // 2017-09-02 15:20:00
@@ -108,7 +108,17 @@ describe("interval", () => {
 
 describe("website examples", () => {
   it("first day of next month", () => {
-    const actual = new PojoDate("2020-02-23 14:59").add({ months: 1}).set({ days: 1 }).formatIso("date")
+    const actual = new PojoDate("2020-02-23 14:59").add({ months: 1 }).set({ days: 1 }).formatIso("date")
     expect(actual).toEqual("2020-03-01");
+  });
+
+  it("last day of month", () => {
+    const actual = new PojoDate("2016-01-14 08:39:00").add({ months: 1 }).set({ days: 1 }).add({ days: -1 }).formatIso("date")
+    expect(actual).toEqual("2016-01-31");
+  });
+
+  it("last day of month using zero days", () => {
+    const actual = new PojoDate("2016-01-14 08:39:00").add({ months: 1 }).set({ days: 0 }).formatIso("date")
+    expect(actual).toEqual("2016-01-31");
   });
 });
