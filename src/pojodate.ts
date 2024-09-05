@@ -22,11 +22,11 @@ class PojoDate extends Date {
     if (args[0]?.years) {
       super(
         args[0].years,
-        args[0].months ? args[0].months - 1 : 0,
-        args[0].days || 1,
-        args[0].hours || 0,
-        args[0].minutes || 0,
-        args[0].seconds || 0
+        (args[0].months !== undefined) ? args[0].months - 1 : 0,
+        args[0].days ?? 1,
+        args[0].hours ?? 0,
+        args[0].minutes ?? 0,
+        args[0].seconds ?? 0
       );
     } else {
       super(...(args as [any]));
