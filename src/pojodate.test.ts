@@ -131,4 +131,17 @@ describe("website examples", () => {
     const actual = new PojoDate("2016-01-14 08:39:00").add({ months: 1 }).set({ days: 0 }).formatIso("date")
     expect(actual).toEqual("2016-01-31");
   });
+
+  it("convert to date with toDate", () => {
+    const actual = new PojoDate('2025-02-14').toDate();
+    expect(actual).toEqual(new Date('2025-02-14'));
+    expect(actual).not.toHaveProperty("pojo");
+  })
+
+  it("convert to date with new Date", () => {
+    const pojodate = new PojoDate('2025-02-14')
+    const actual = new Date(pojodate);
+    expect(actual).toEqual(new Date('2025-02-14'));
+    expect(actual).not.toHaveProperty("pojo");
+  })
 });
