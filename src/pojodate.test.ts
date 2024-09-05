@@ -53,6 +53,11 @@ describe("add", () => {
     expect(actual).toEqual(new Date("2017-01-14 08:39:00"));
   });
 
+  it("month", () => {
+    const actual = new PojoDate("2016-01-14 08:39:00").add({ months: 1 });
+    expect(actual).toEqual(new Date("2016-02-14 08:39:00"));
+  })
+
   it("day back", () => {
     const actual = new PojoDate("2024-03-04 19:03:00").add({ days: -1 });
     expect(actual).toEqual(new Date("2024-03-03 19:03:00"));
