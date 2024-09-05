@@ -85,17 +85,23 @@ describe("chains", () => {
 });
 
 describe("interval", () => {
-  it("returns pojo", () => {
+  it("can be created", () => {
     const date = new PojoDate("2024-03-04 19:03:00")
     const actual = date.interval("2017-09-02 15:20:00");
     expect(actual).toMatchObject({ years: 6, months: 7, days: 5, hours: 4, minutes: 43, seconds: 0 });
   });
 
-  it("can be added", () => {
+  it("add", () => {
     const date1 = new PojoDate("2024-03-04 19:03:00")
     const interval1 = date1.interval("2017-09-02 15:20:00");
     const date2 = new PojoDate("2016-01-14 08:39:00")
     const interval2 = date2.interval("2020-02-23 14:59:00");
     expect(interval1.add(interval2)).toMatchObject({ years: 10, months: 9, days: 6, hours: 11, minutes: 3, seconds: 0 });
+  })
+
+  it("formatSignificant", () => {
+    const interval = new PojoDate("2017-09-02 15:20:00").interval("2017-09-03 17:20:00")
+    const actual = interval.formatSignificant(2, ({ parts }) => parts.join(', '));
+    expect(actual).toEqual("1 day, 2 hours")
   })
 });
