@@ -5,9 +5,11 @@ A JS Date library made for developer experience.
 ```js
 // first day of next month
 new PojoDate().add({ months: 1 }).set({ days: 1 }).formatIso("date")
+// "2020-03-01"
 ```
 _Wrapper labyrynths are still a valid alternative, especially if you're a minotaur._
 
 **Small and expressive API**
 based on object { years, months, days ... }
 _Called Pojo for Plain Old Javascript Object_
+
