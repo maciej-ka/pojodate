@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import PojoDate from './pojodate';
 
-// Brun
 // Gniewo
 // Zu
 // Jaga
+// Brun
 
 // 2016-01-14 08:39:00
 // 2017-09-02 15:20:00
@@ -104,4 +104,11 @@ describe("interval", () => {
     const actual = interval.formatSignificant(2, ({ parts }) => parts.join(', '));
     expect(actual).toEqual("1 day, 2 hours")
   })
+});
+
+describe("website examples", () => {
+  it("first day of next month", () => {
+    const actual = new PojoDate("2020-02-23 14:59").add({ months: 1}).set({ days: 1 }).formatIso("date")
+    expect(actual).toEqual("2020-03-01");
+  });
 });
