@@ -15,7 +15,21 @@ or shorter:
 
 **Small and expressive API**
 based on object { years, months, days ... }
-_Called Pojo for Plain Old Java Object, you're a Java dev now._
+_Called Pojo for Plain Old Java Object._
 
 **PojoDate extends Date**
 _90% conversion drop here_
+What will happen if in 2088 base Date will add same methods?
+Your code will work as before, still using PojoDate versions.
+Outside, to be safe, please convert to Date when calling libs.
+```
+const schedule = require('node-schedule');
+const valentine = new PojoDate('2025-02-14');
+schedule.scheduleJob(new Date(valentine), () => shave());
+```
+or
+`schedule.scheduleJob(valentine.toDate(), () => shave());`
+
+**Intervals**
+_We also offer Ponzi Scheme benefits to early adopters_
+
