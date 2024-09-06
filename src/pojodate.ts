@@ -1,5 +1,5 @@
 import { Pojo, add } from './pojo';
-import PojoDiff from "./pojodiff";
+import PojoInterval from "./pojointerval";
 
 class PojoDate extends Date {
   pojo(): Pojo {
@@ -74,14 +74,14 @@ class PojoDate extends Date {
     return this.format((d) => `${d.hours}:${d.minutes}:${d.seconds}`);
   }
 
-  interval(): PojoDiff;
-  interval(string: string): PojoDiff;
-  interval(date: Date): PojoDiff;
-  interval(year: number, monthIndex: number, day?: number, hours?: number, minutes?: number, seconds?: number, miliseconds?: number): PojoDiff;
-  interval(pojo: Pick<Pojo, "years"> & Partial<Pojo>): PojoDiff;
-  interval(...args: any[]): PojoDiff {
+  interval(): PojoInterval;
+  interval(string: string): PojoInterval;
+  interval(date: Date): PojoInterval;
+  interval(year: number, monthIndex: number, day?: number, hours?: number, minutes?: number, seconds?: number, miliseconds?: number): PojoInterval;
+  interval(pojo: Pick<Pojo, "years"> & Partial<Pojo>): PojoInterval;
+  interval(...args: any[]): PojoInterval {
     const diff = this.getTime() - new PojoDate(...args as [any]).getTime();
-    return new PojoDiff(diff);
+    return new PojoInterval(diff);
   }
 }
 

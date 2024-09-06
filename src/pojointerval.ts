@@ -1,6 +1,6 @@
 import { Pojo, add, toMiliseconds } from "./pojo";
 
-class PojoDiff implements Pojo {
+class PojoInterval implements Pojo {
   years: number;
   months: number;
   days: number;
@@ -21,8 +21,8 @@ class PojoDiff implements Pojo {
     [this.years, this.months] = calc(this.months, 12);
   }
 
-  add(arg: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): PojoDiff {
-    return new PojoDiff(toMiliseconds(add(this, arg)));
+  add(arg: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): PojoInterval {
+    return new PojoInterval(toMiliseconds(add(this, arg)));
   }
 
   formatSignificant(
@@ -49,4 +49,4 @@ class PojoDiff implements Pojo {
   }
 }
 
-export default PojoDiff;
+export default PojoInterval;
