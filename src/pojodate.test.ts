@@ -145,10 +145,8 @@ describe("website examples", () => {
     expect(actual).not.toHaveProperty("pojo");
   })
 
-  it("travel time interval", () => {
-    const takeoff = new Date("2024-09-06 12:20:00");
-    const landing = new Date("2024-09-06 16:40:00");
-    const actual = new PojoDate(takeoff).interval(landing).formatSignificant(2);
+  it("basic interval", () => {
+    const actual = new PojoDate("2024-09-06 12:20:00").interval("2024-09-06 16:40:17").formatSignificant(2);
     expect(actual).toEqual("4 hours, 20 minutes");
   })
 });
