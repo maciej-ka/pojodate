@@ -25,14 +25,27 @@ class PojoDiff implements Pojo {
     return new PojoDiff(toMiliseconds(add(this, arg)));
   }
 
-  formatSignificant(count: number, fn: ({ keys, values, units, parts }: { keys: string[], values: number[], units: string[], parts: string[] }) => string): string {
+  formatSignificant(
+    count: number,
+    fn: ({
+      keys,
+      values,
+      units,
+      parts,
+    }: {
+      keys: string[];
+      values: number[];
+      units: string[];
+      parts: string[];
+    }) => string = ({ parts }) => parts.join(', ')
+  ): string {
     const allKeys = ["years", "months", "days", "hours", "minutes", "seconds"];
-    const leftTrim = allKeys.slice(allKeys.findIndex(unit => this[unit]));
-    const keys = leftTrim.slice(0, count).filter(key => this[key]);
-    const values = keys.map(key => this[key]);
-    const units = keys.map(key => this[key] > 1 ? key : key.slice(0, -1));
-    const parts = units.map((unit, i) => `${values[i]} ${unit}`)
-    return fn({ keys, values, units, parts })
+    const leftTrim = allKeys.slice(allKeys.findIndex((unit) => this[unit]));
+    const keys = leftTrim.slice(0, count).filter((key) => this[key]);
+    const values = keys.map((key) => this[key]);
+    const units = keys.map((key) => (this[key] > 1 ? key : key.slice(0, -1)));
+    const parts = units.map((unit, i) => `${values[i]} ${unit}`);
+    return fn({ keys, values, units, parts });
   }
 }
 
