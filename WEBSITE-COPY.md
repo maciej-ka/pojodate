@@ -31,7 +31,16 @@ or
 `schedule.scheduleJob(valentine.toDate(), shave);`
 
 **Intervals**
+```
+const benuMeetingIn = new PojoDate("2182-09-24").interval(new Date());
+// { "years": 160, "months": 4, "days": 5, "hours": 14, "minutes": 0, "seconds": 0 }
+```
+Created interval has a add methodfew methods:
+```
+const totalTravelTime ...
+```
 
 **Early version**
+Please report bugs and feature requests here: https://github.com/maciej-ka/pojotime/issues
 _We offer Ponzi Scheme benefits to early adopters_
 

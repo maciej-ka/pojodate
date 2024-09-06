@@ -144,4 +144,10 @@ describe("website examples", () => {
     expect(actual).toEqual(new Date('2025-02-14'));
     expect(actual).not.toHaveProperty("pojo");
   })
+
+  it("benu meeting interval", () => {
+    const now = new Date("2024-09-06 12:00:00");
+    const actual = new PojoDate("2182-09-24").interval(now);
+    expect(actual).toEqual({ "years": 160, "months": 4, "days": 5, "hours": 14, "minutes": 0, "seconds": 0 });
+  })
 });
