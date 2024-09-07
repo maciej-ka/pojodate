@@ -32,7 +32,7 @@ or
 
 **Intervals**
 ```
-new PojoDate("2024-09-06 12:20:00").interval("2024-09-06 16:40:17").formatSignificant(2);
+new PojoDate("2024-09-06 12:20:00").intervalTo("2024-09-06 16:40:17").formatSignificant(2);
 // "4 hours, 20 minutes"
 ```
 Created interval has a add methodfew methods:

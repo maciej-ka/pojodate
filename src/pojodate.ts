@@ -74,12 +74,12 @@ class PojoDate extends Date {
     return this.format((d) => `${d.hours}:${d.minutes}:${d.seconds}`);
   }
 
-  interval(): PojoInterval;
-  interval(string: string): PojoInterval;
-  interval(date: Date): PojoInterval;
-  interval(year: number, monthIndex: number, day?: number, hours?: number, minutes?: number, seconds?: number, miliseconds?: number): PojoInterval;
-  interval(pojo: Pick<Pojo, "years"> & Partial<Pojo>): PojoInterval;
-  interval(...args: any[]): PojoInterval {
+  intervalTo(): PojoInterval;
+  intervalTo(string: string): PojoInterval;
+  intervalTo(date: Date): PojoInterval;
+  intervalTo(year: number, monthIndex: number, day?: number, hours?: number, minutes?: number, seconds?: number, miliseconds?: number): PojoInterval;
+  intervalTo(pojo: Pick<Pojo, "years"> & Partial<Pojo>): PojoInterval;
+  intervalTo(...args: any[]): PojoInterval {
     const diff = this.getTime() - new PojoDate(...args as [any]).getTime();
     return new PojoInterval(diff);
   }
