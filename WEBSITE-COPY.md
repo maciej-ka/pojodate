@@ -32,13 +32,22 @@ or
 
 **Intervals**
 ```
-new PojoDate("2024-09-06 12:20:00").intervalTo("2024-09-06 16:40:17").formatSignificant(2);
+new PojoDate("2024-09-06 12:00:00").intervalTo("2024-09-06 16:20:40").formatSignificant(2);
 // "4 hours, 20 minutes"
 ```
-Created interval has a add methodfew methods:
+Intervals also have format of { years, months, days ... }.
+So they can be used in PojoDate methods as an argument:
 ```
-const totalTravelTime ...
+// TODO
 ```
+And interval itself has an add method:
+```
+const interval1 = new PojoDate("2024-09-06 12:00:00").intervalTo("2024-09-06 16:20:40")
+const interval2 = new PojoDate("2024-09-06 17:00:00").intervalTo("2024-09-06 19:00:00")
+const total = interval1.add(interval2)
+// 
+```
+
 
 **Early version**
 Please report bugs and feature requests here: https://github.com/maciej-ka/pojotime/issues
