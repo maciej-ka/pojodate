@@ -22,18 +22,3 @@ export function add(
   };
 }
 
-export function toMiliseconds(pojo: Pojo): number {
-  let result = 0;
-  let multiplier = 1;
-  const calc = (value: number, multiplierBump: number) => [
-    result + value * multiplier * multiplierBump,
-    multiplier * multiplierBump,
-  ];
-  [result, multiplier] = calc(pojo.seconds, 1000);
-  [result, multiplier] = calc(pojo.minutes, 60);
-  [result, multiplier] = calc(pojo.hours, 60);
-  [result, multiplier] = calc(pojo.days, 24);
-  [result, multiplier] = calc(pojo.months, 30);
-  [result, multiplier] = calc(pojo.years, 12);
-  return result;
-}
