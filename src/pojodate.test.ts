@@ -14,7 +14,7 @@ import PojoDate from './pojodate';
 describe("get pojo", () => {
   it("on correct date", () => {
     const actual = new PojoDate("2020-02-23 14:59:00").pojo();
-    expect(actual).toMatchObject({
+    expect(actual).toEqual({
       years: 2020,
       months: 2,
       days: 23,
@@ -98,7 +98,7 @@ describe("interval", () => {
   it("can be created", () => {
     const date = new PojoDate("2024-03-04 19:03:00")
     const actual = date.intervalTo("2017-09-02 15:20:00");
-    expect(actual).toMatchObject({ years: 6, months: 7, days: 5, hours: 4, minutes: 43, seconds: 0 });
+    expect(actual).toEqual({ years: 6, months: 7, days: 5, hours: 4, minutes: 43, seconds: 0 });
   });
 
   it("add", () => {
@@ -106,7 +106,7 @@ describe("interval", () => {
     const interval1 = date1.intervalTo("2017-09-02 15:20:00");
     const date2 = new PojoDate("2016-01-14 08:39:00")
     const interval2 = date2.intervalTo("2020-02-23 14:59:00");
-    expect(interval1.add(interval2)).toMatchObject({ years: 10, months: 9, days: 6, hours: 11, minutes: 3, seconds: 0 });
+    expect(interval1.add(interval2)).toEqual({ years: 10, months: 9, days: 6, hours: 11, minutes: 3, seconds: 0 });
   })
 
   it("formatSignificant", () => {
@@ -146,7 +146,14 @@ describe("website examples", () => {
   })
 
   it("basic interval", () => {
-    const actual = new PojoDate("2024-09-06 12:20:00").intervalTo("2024-09-06 16:40:17").formatSignificant(2);
+    const actual = new PojoDate("2024-09-06 12:00:00").intervalTo("2024-09-06 16:20:40").formatSignificant(2);
     expect(actual).toEqual("4 hours, 20 minutes");
+  })
+
+  it("add total interval", () => {
+    const interval1 = new PojoDate("2024-09-06 12:00:00").intervalTo("2024-09-06 16:20:40")
+    const interval2 = new PojoDate("2024-09-06 17:00:00").intervalTo("2024-09-06 19:00:00")
+    const actual = interval1.add(interval2)
+    expect(actual).toEqual({ years: 0, months: 0, days: 0, hours: 6, minutes: 20, seconds: 40 });
   })
 });
