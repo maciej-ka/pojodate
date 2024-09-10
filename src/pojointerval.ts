@@ -1,5 +1,14 @@
 import { Pojo, add } from "./pojo";
 
+export const msUnits = {
+  seconds: 1000,
+  minutes: 60 * 1000,
+  hours: 60 * 60 * 1000,
+  days: 24 * 60 * 60 * 1000,
+  months: 30.4375 * 24 * 60 * 60 * 1000,
+  years: 365.25 * 24 * 60 * 60 * 1000,
+}
+
 export function toMiliseconds(pojo: Pojo): number {
   let result = 0;
   let multiplier = 1;
