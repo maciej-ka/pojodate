@@ -5,8 +5,8 @@ export const msUnits = {
   minutes: 60 * 1000,
   hours: 60 * 60 * 1000,
   days: 24 * 60 * 60 * 1000,
-  months: 30.4375 * 24 * 60 * 60 * 1000,
-  years: 365.25 * 24 * 60 * 60 * 1000,
+  months: 30 * 24 * 60 * 60 * 1000,
+  years: 365 * 24 * 60 * 60 * 1000,
 }
 
 export function toMiliseconds(pojo: Pojo): number {
@@ -20,7 +20,7 @@ export function toMiliseconds(pojo: Pojo): number {
   [result, multiplier] = calc(pojo.minutes, 60);
   [result, multiplier] = calc(pojo.hours, 60);
   [result, multiplier] = calc(pojo.days, 24);
-  [result, multiplier] = calc(pojo.months, 30.4375);
+  [result, multiplier] = calc(pojo.months, 30);
   [result, multiplier] = calc(pojo.years, 12);
   return result;
 }
@@ -42,8 +42,8 @@ class PojoInterval implements Pojo {
     [this.minutes, this.seconds] = calc(this.seconds, 60);
     [this.hours, this.minutes] = calc(this.minutes, 60);
     [this.days, this.hours] = calc(this.hours, 24);
-    [this.years, this.days] = calc(this.days, 365.25);
-    [this.months, this.days] = calc(this.days, 30.4375);
+    [this.years, this.days] = calc(this.days, 365);
+    [this.months, this.days] = calc(this.days, 30);
   }
 
   add(arg: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): PojoInterval {
