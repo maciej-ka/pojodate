@@ -55,8 +55,8 @@ class PojoDate extends Date {
     return new PojoDate(set(this.toPojo(), pojo));
   }
 
-  format(fn: (current: { [K in keyof Pojo]: string }) => string): string {
-    return format(this.toPojo(), fn);
+  format(formatter: (current: { [K in keyof Pojo]: string }) => string): string {
+    return format(this.toPojo(), formatter);
   }
 
   formatIso(parts: "full" | "date" | "time" = "full"): string {

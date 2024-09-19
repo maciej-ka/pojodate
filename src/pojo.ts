@@ -9,35 +9,35 @@ export type Pojo = {
 }
 
 export function add(
-  current: Pojo,
+  pojo: Pojo,
   change: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)
 ): Pojo {
-  const pojo = typeof change === "function" ? change(current) : change;
+  const changeObj = typeof change === "function" ? change(pojo) : change;
   return {
-    years: current.years + (pojo.years || 0),
-    months: current.months + (pojo.months || 0),
-    days: current.days + (pojo.days || 0),
-    hours: current.hours + (pojo.hours || 0),
-    minutes: current.minutes + (pojo.minutes || 0),
-    seconds: current.seconds + (pojo.seconds || 0),
-    miliseconds: current.miliseconds + (pojo.miliseconds || 0),
+    years: pojo.years + (changeObj.years || 0),
+    months: pojo.months + (changeObj.months || 0),
+    days: pojo.days + (changeObj.days || 0),
+    hours: pojo.hours + (changeObj.hours || 0),
+    minutes: pojo.minutes + (changeObj.minutes || 0),
+    seconds: pojo.seconds + (changeObj.seconds || 0),
+    miliseconds: pojo.miliseconds + (changeObj.miliseconds || 0),
   };
 }
 
 export function set(
-  current: Pojo,
+  pojo: Pojo,
   change: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)
 ): Pojo {
-  const pojo = typeof change === "function" ? change(current) : change;
+  const changeObj = typeof change === "function" ? change(pojo) : change;
   return {
-    ...current,
-    ...pojo
+    ...pojo,
+    ...changeObj
   }
 }
 
-export function format(pojo: Pojo, fn: (current: { [K in keyof Pojo]: string }) => string): string {
+export function format(pojo: Pojo, formatter: (current: { [K in keyof Pojo]: string }) => string): string {
   const pad = (arg: number) => arg.toString().padStart(2, "0");
-  return fn({
+  return formatter({
     years: pojo.years.toString(),
     months: pad(pojo.months),
     days: pad(pojo.days),
