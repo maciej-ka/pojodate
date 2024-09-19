@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+
+import { formatSignificant } from './pojo';
 import PojoDate from './pojodate';
 
 // Jaga
@@ -84,6 +86,12 @@ describe("format", () => {
     const actual = new PojoDate("2020-02-23 14:59:00").formatIso();
     expect(actual).toEqual("2020-02-23 14:59:00");
   });
+
+  it("formatSignificant", () => {
+    const pojo = { years: 0, months: 0, days: 1, hours: 2, minutes: 20, seconds: 0, miliseconds: 0 }
+    const actual = formatSignificant(pojo, 2, ({ parts }) => parts.join(', '));
+    expect(actual).toEqual("1 day, 2 hours")
+  })
 });
 
 describe("chains", () => {
