@@ -1,4 +1,4 @@
-import { Pojo, add } from './pojo';
+import { Pojo, add, set } from './pojo';
 
 class PojoDate extends Date {
   constructor();
@@ -22,7 +22,7 @@ class PojoDate extends Date {
     }
   }
 
-  pojo(): Pojo {
+  toPojo(): Pojo {
     return {
       years: this.getFullYear(),
       months: this.getMonth() + 1,
@@ -34,47 +34,45 @@ class PojoDate extends Date {
     };
   }
 
-
   toDate(): Date {
-    const pojo = this.pojo();
+    const pojo = this.toPojo();
     return new Date(
       pojo.years,
       pojo.months - 1,
       pojo.days,
       pojo.hours,
       pojo.minutes,
-      pojo.seconds
+      pojo.seconds,
+      pojo.miliseconds
     );
   }
 
-  add(arg: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): PojoDate {
-    return new PojoDate(add(this.pojo(), arg));
+  add(pojo: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): PojoDate {
+    return new PojoDate(add(this.toPojo(), pojo));
   }
 
-  set(arg: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): PojoDate {
-    const _current = this.pojo();
-    const pojo = typeof arg === "function" ? arg(_current) : arg;
-    return new PojoDate({ ..._current, ...pojo });
+  set(pojo: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): PojoDate {
+    return new PojoDate(set(this.toPojo(), pojo));
   }
 
-  format(fn: (current: { [K in keyof Pojo]: string }) => string): string {
-    const _current = this.pojo();
-    const pad = (arg: number) => arg.toString().padStart(2, "0");
-    return fn({
-      years: _current.years.toString(),
-      months: pad(_current.months),
-      days: pad(_current.days),
-      hours: pad(_current.hours),
-      minutes: pad(_current.minutes),
-      seconds: pad(_current.seconds),
-    });
-  }
-
-  formatIso(parts: "full" | "date" | "time" = "full"): string {
-    if (parts === "full") return this.format((d) => `${d.years}-${d.months}-${d.days} ${d.hours}:${d.minutes}:${d.seconds}`);
-    if (parts === "date") return this.format((d) => `${d.years}-${d.months}-${d.days}`);
-    return this.format((d) => `${d.hours}:${d.minutes}:${d.seconds}`);
-  }
+  // format(fn: (current: { [K in keyof Pojo]: string }) => string): string {
+  //   const _current = this.toPojo();
+  //   const pad = (arg: number) => arg.toString().padStart(2, "0");
+  //   return fn({
+  //     years: _current.years.toString(),
+  //     months: pad(_current.months),
+  //     days: pad(_current.days),
+  //     hours: pad(_current.hours),
+  //     minutes: pad(_current.minutes),
+  //     seconds: pad(_current.seconds),
+  //   });
+  // }
+  //
+  // formatIso(parts: "full" | "date" | "time" = "full"): string {
+  //   if (parts === "full") return this.format((d) => `${d.years}-${d.months}-${d.days} ${d.hours}:${d.minutes}:${d.seconds}`);
+  //   if (parts === "date") return this.format((d) => `${d.years}-${d.months}-${d.days}`);
+  //   return this.format((d) => `${d.hours}:${d.minutes}:${d.seconds}`);
+  // }
 }
 
 export default PojoDate;

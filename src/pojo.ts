@@ -1,4 +1,4 @@
-export interface Pojo {
+export type Pojo = {
   years: number;
   months: number;
   days: number;
@@ -9,18 +9,28 @@ export interface Pojo {
 }
 
 export function add(
-  base: Pojo,
-  change: Partial<Pojo> | ((base: Pojo) => Partial<Pojo>)
+  current: Pojo,
+  change: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)
 ): Pojo {
-  const pojo = typeof change === "function" ? change(base) : change;
+  const pojo = typeof change === "function" ? change(current) : change;
   return {
-    years: base.years + (pojo.years || 0),
-    months: base.months + (pojo.months || 0),
-    days: base.days + (pojo.days || 0),
-    hours: base.hours + (pojo.hours || 0),
-    minutes: base.minutes + (pojo.minutes || 0),
-    seconds: base.seconds + (pojo.seconds || 0),
-    miliseconds: base.miliseconds + (pojo.miliseconds || 0),
+    years: current.years + (pojo.years || 0),
+    months: current.months + (pojo.months || 0),
+    days: current.days + (pojo.days || 0),
+    hours: current.hours + (pojo.hours || 0),
+    minutes: current.minutes + (pojo.minutes || 0),
+    seconds: current.seconds + (pojo.seconds || 0),
+    miliseconds: current.miliseconds + (pojo.miliseconds || 0),
   };
 }
 
+export function set(
+  current: Pojo,
+  change: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)
+): Pojo {
+  const pojo = typeof change === "function" ? change(current) : change;
+  return {
+    ...current,
+    ...pojo
+  }
+}
