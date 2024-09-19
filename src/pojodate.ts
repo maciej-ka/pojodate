@@ -1,4 +1,4 @@
-import { Pojo, add, set } from './pojo';
+import { Pojo, add, format, formatIso, set } from './pojo';
 
 class PojoDate extends Date {
   constructor();
@@ -55,24 +55,13 @@ class PojoDate extends Date {
     return new PojoDate(set(this.toPojo(), pojo));
   }
 
-  // format(fn: (current: { [K in keyof Pojo]: string }) => string): string {
-  //   const _current = this.toPojo();
-  //   const pad = (arg: number) => arg.toString().padStart(2, "0");
-  //   return fn({
-  //     years: _current.years.toString(),
-  //     months: pad(_current.months),
-  //     days: pad(_current.days),
-  //     hours: pad(_current.hours),
-  //     minutes: pad(_current.minutes),
-  //     seconds: pad(_current.seconds),
-  //   });
-  // }
-  //
-  // formatIso(parts: "full" | "date" | "time" = "full"): string {
-  //   if (parts === "full") return this.format((d) => `${d.years}-${d.months}-${d.days} ${d.hours}:${d.minutes}:${d.seconds}`);
-  //   if (parts === "date") return this.format((d) => `${d.years}-${d.months}-${d.days}`);
-  //   return this.format((d) => `${d.hours}:${d.minutes}:${d.seconds}`);
-  // }
+  format(fn: (current: { [K in keyof Pojo]: string }) => string): string {
+    return format(this.toPojo(), fn);
+  }
+
+  formatIso(parts: "full" | "date" | "time" = "full"): string {
+    return formatIso(this.toPojo(), parts);
+  }
 }
 
 export default PojoDate;

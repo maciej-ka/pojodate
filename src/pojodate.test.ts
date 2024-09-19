@@ -73,55 +73,55 @@ describe("set", () => {
   });
 });
 
-// describe("format", () => {
-//   it("default", () => {
-//     const date = new PojoDate("2017-09-02 15:20:00");
-//     const actual = date.format((d) => `${d.days},${d.months},${d.years}`);
-//     expect(actual).toEqual("02,09,2017");
-//   });
-//
-//   it("iso", () => {
-//     const actual = new PojoDate("2020-02-23 14:59:00").formatIso();
-//     expect(actual).toEqual("2020-02-23 14:59:00");
-//   });
-// });
-//
-// describe("chains", () => {
-//   it("add, set and format", () => {
-//     const actual = new PojoDate("2016-01-14")
-//       .add({ months: 1 })
-//       .set({ days: 1 })
-//       .format((d) => `${d.years}, ${d.months}, ${d.days}`);
-//     expect(actual).toEqual("2016, 02, 01");
-//   });
-// });
-//
-// describe("website examples", () => {
-//   it("first day of next month", () => {
-//     const actual = new PojoDate("2020-02-23 14:59").add({ months: 1 }).set({ days: 1 }).formatIso("date")
-//     expect(actual).toEqual("2020-03-01");
-//   });
-//
-//   it("last day of month", () => {
-//     const actual = new PojoDate("2016-01-14 08:39:00").add({ months: 1 }).set({ days: 1 }).add({ days: -1 }).formatIso("date")
-//     expect(actual).toEqual("2016-01-31");
-//   });
-//
-//   it("last day of month using zero days", () => {
-//     const actual = new PojoDate("2016-01-14 08:39:00").add({ months: 1 }).set({ days: 0 }).formatIso("date")
-//     expect(actual).toEqual("2016-01-31");
-//   });
-//
-//   it("convert to date with toDate", () => {
-//     const actual = new PojoDate('2025-02-14').toDate();
-//     expect(actual).toEqual(new Date('2025-02-14'));
-//     expect(actual).not.toHaveProperty("pojo");
-//   })
-//
-//   it("convert to date with new Date", () => {
-//     const pojodate = new PojoDate('2025-02-14')
-//     const actual = new Date(pojodate);
-//     expect(actual).toEqual(new Date('2025-02-14'));
-//     expect(actual).not.toHaveProperty("pojo");
-//   })
-// });
+describe("format", () => {
+  it("default", () => {
+    const date = new PojoDate("2017-09-02 15:20:00");
+    const actual = date.format((d) => `${d.days},${d.months},${d.years}`);
+    expect(actual).toEqual("02,09,2017");
+  });
+
+  it("iso", () => {
+    const actual = new PojoDate("2020-02-23 14:59:00").formatIso();
+    expect(actual).toEqual("2020-02-23 14:59:00");
+  });
+});
+
+describe("chains", () => {
+  it("add, set and format", () => {
+    const actual = new PojoDate("2016-01-14")
+      .add({ months: 1 })
+      .set({ days: 1 })
+      .format((d) => `${d.years}, ${d.months}, ${d.days}`);
+    expect(actual).toEqual("2016, 02, 01");
+  });
+});
+
+describe("website examples", () => {
+  it("first day of next month", () => {
+    const actual = new PojoDate("2020-02-23 14:59").add({ months: 1 }).set({ days: 1 }).formatIso("date")
+    expect(actual).toEqual("2020-03-01");
+  });
+
+  it("last day of month", () => {
+    const actual = new PojoDate("2016-01-14 08:39:00").add({ months: 1 }).set({ days: 1 }).add({ days: -1 }).formatIso("date")
+    expect(actual).toEqual("2016-01-31");
+  });
+
+  it("last day of month using zero days", () => {
+    const actual = new PojoDate("2016-01-14 08:39:00").add({ months: 1 }).set({ days: 0 }).formatIso("date")
+    expect(actual).toEqual("2016-01-31");
+  });
+
+  it("convert to date with toDate", () => {
+    const actual = new PojoDate('2025-02-14').toDate();
+    expect(actual).toEqual(new Date('2025-02-14'));
+    expect(actual).not.toHaveProperty("pojo");
+  })
+
+  it("convert to date with new Date", () => {
+    const pojodate = new PojoDate('2025-02-14')
+    const actual = new Date(pojodate);
+    expect(actual).toEqual(new Date('2025-02-14'));
+    expect(actual).not.toHaveProperty("pojo");
+  })
+});
