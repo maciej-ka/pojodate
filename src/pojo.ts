@@ -5,20 +5,22 @@ export interface Pojo {
   hours: number;
   minutes: number;
   seconds: number;
+  miliseconds: number;
 }
 
 export function add(
-  current: Pojo,
-  arg: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)
+  base: Pojo,
+  change: Partial<Pojo> | ((base: Pojo) => Partial<Pojo>)
 ): Pojo {
-  const pojo = typeof arg === "function" ? arg(current) : arg;
+  const pojo = typeof change === "function" ? change(base) : change;
   return {
-    years: current.years + (pojo.years || 0),
-    months: current.months + (pojo.months || 0),
-    days: current.days + (pojo.days || 0),
-    hours: current.hours + (pojo.hours || 0),
-    minutes: current.minutes + (pojo.minutes || 0),
-    seconds: current.seconds + (pojo.seconds || 0),
+    years: base.years + (pojo.years || 0),
+    months: base.months + (pojo.months || 0),
+    days: base.days + (pojo.days || 0),
+    hours: base.hours + (pojo.hours || 0),
+    minutes: base.minutes + (pojo.minutes || 0),
+    seconds: base.seconds + (pojo.seconds || 0),
+    miliseconds: base.miliseconds + (pojo.miliseconds || 0),
   };
 }
 
