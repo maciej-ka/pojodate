@@ -6,7 +6,7 @@ export type Pojo = {
   minutes: number;
   seconds: number;
   miliseconds: number;
-}
+};
 
 export function add(
   pojo: Pojo,
@@ -31,11 +31,14 @@ export function set(
   const changeObj = typeof change === "function" ? change(pojo) : change;
   return {
     ...pojo,
-    ...changeObj
-  }
+    ...changeObj,
+  };
 }
 
-export function format(pojo: Pojo, formatter: (current: { [K in keyof Pojo]: string }) => string): string {
+export function format(
+  pojo: Pojo,
+  formatter: (current: { [K in keyof Pojo]: string }) => string
+): string {
   const pad = (arg: number) => arg.toString().padStart(2, "0");
   return formatter({
     years: pojo.years.toString(),
@@ -48,7 +51,11 @@ export function format(pojo: Pojo, formatter: (current: { [K in keyof Pojo]: str
   });
 }
 
-export function formatIso(pojo: Pojo, parts: "full" | "date" | "time" = "full"): string {
+// prettier-ignore
+export function formatIso(
+  pojo: Pojo,
+  parts: "full" | "date" | "time" = "full"
+): string {
   if (parts === "full") return format(pojo, (d) => `${d.years}-${d.months}-${d.days} ${d.hours}:${d.minutes}:${d.seconds}`);
   if (parts === "date") return format(pojo, (d) => `${d.years}-${d.months}-${d.days}`);
   return format(pojo, (d) => `${d.hours}:${d.minutes}:${d.seconds}`);
@@ -67,9 +74,17 @@ export function formatSignificant(
     values: number[];
     units: string[];
     parts: string[];
-  }) => string = ({ parts }) => parts.join(', ')
+  }) => string = ({ parts }) => parts.join(", ")
 ): string {
-  const allKeys = ["years", "months", "days", "hours", "minutes", "seconds", "miliseconds"];
+  const allKeys = [
+    "years",
+    "months",
+    "days",
+    "hours",
+    "minutes",
+    "seconds",
+    "miliseconds",
+  ];
   const leftTrim = allKeys.slice(allKeys.findIndex((unit) => pojo[unit]));
   const keys = leftTrim.slice(0, count).filter((key) => pojo[key]);
   const values = keys.map((key) => pojo[key]);
