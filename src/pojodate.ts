@@ -1,16 +1,26 @@
-import { Pojo, add, format, formatIso, set } from './pojo';
+import { Pojo, add, format, formatIso, set } from "./pojo";
 
 class PojoDate extends Date {
+  // standard Date constructors
   constructor();
   constructor(string: string);
   constructor(date: Date);
-  constructor(year: number, monthIndex: number, day?: number, hours?: number, minutes?: number, seconds?: number, miliseconds?: number);
+  constructor(
+    year: number,
+    monthIndex: number,
+    day?: number,
+    hours?: number,
+    minutes?: number,
+    seconds?: number,
+    miliseconds?: number
+  );
+  // unique PojoDate constructor
   constructor(pojo: Pick<Pojo, "years"> & Partial<Pojo>);
   constructor(...args: any[]) {
     if (args[0]?.years) {
       super(
         args[0].years,
-        (args[0].months !== undefined) ? args[0].months - 1 : 0,
+        args[0].months !== undefined ? args[0].months - 1 : 0,
         args[0].days ?? 1,
         args[0].hours ?? 0,
         args[0].minutes ?? 0,
@@ -55,7 +65,9 @@ class PojoDate extends Date {
     return new PojoDate(set(this.toPojo(), pojo));
   }
 
-  format(formatter: (current: { [K in keyof Pojo]: string }) => string): string {
+  format(
+    formatter: (current: { [K in keyof Pojo]: string }) => string
+  ): string {
     return format(this.toPojo(), formatter);
   }
 
