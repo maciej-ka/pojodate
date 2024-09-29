@@ -3,10 +3,10 @@ import { describe, expect, it } from "vitest";
 import { formatSignificant } from "../src/pojo";
 import PojoDate from "../src/pojodate";
 
-// Jaga
 // Buniek
 // Gniewo
 // Zu
+// Jaga
 
 // 2016-01-14 08:39:00
 // 2017-09-02 15:20:00
@@ -30,8 +30,8 @@ describe("constructor", () => {
   });
 });
 
-describe("get pojo", () => {
-  it("on correct date", () => {
+describe("pojo", () => {
+  it("works", () => {
     const actual = new PojoDate("2020-02-23 14:59:00:200").pojo;
     expect(actual).toEqual({
       years: 2020,
@@ -42,6 +42,19 @@ describe("get pojo", () => {
       seconds: 0,
       miliseconds: 200,
     });
+  });
+});
+
+describe("years, months ...", () => {
+  it("works", () => {
+    const actual = new PojoDate("2024-03-04 19:03:30.200") ;
+    expect(actual.years).toEqual(2024);
+    expect(actual.months).toEqual(3);
+    expect(actual.days).toEqual(4);
+    expect(actual.hours).toEqual(19);
+    expect(actual.minutes).toEqual(3);
+    expect(actual.seconds).toEqual(30);
+    expect(actual.miliseconds).toEqual(200);
   });
 });
 

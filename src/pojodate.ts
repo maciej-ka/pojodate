@@ -43,6 +43,13 @@ class PojoDate extends Date {
       miliseconds: this.getMilliseconds(),
     };
   }
+  get years(): number { return this.getFullYear() }
+  get months(): number { return this.getMonth() + 1 }
+  get days(): number { return this.getDate() }
+  get hours(): number { return this.getHours() }
+  get minutes(): number { return this.getMinutes() }
+  get seconds(): number { return this.getSeconds() }
+  get miliseconds(): number { return this.getMilliseconds() }
 
   toDate(): Date {
     const pojo = this.pojo;
