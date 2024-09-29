@@ -1,4 +1,4 @@
-var pojodate = (() => {
+var PojoDate = (() => {
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
   var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -78,7 +78,7 @@ var pojodate = (() => {
         super(...args);
       }
     }
-    toPojo() {
+    get pojo() {
       return {
         years: this.getFullYear(),
         months: this.getMonth() + 1,
@@ -89,8 +89,29 @@ var pojodate = (() => {
         miliseconds: this.getMilliseconds()
       };
     }
+    get years() {
+      return this.getFullYear();
+    }
+    get months() {
+      return this.getMonth() + 1;
+    }
+    get days() {
+      return this.getDate();
+    }
+    get hours() {
+      return this.getHours();
+    }
+    get minutes() {
+      return this.getMinutes();
+    }
+    get seconds() {
+      return this.getSeconds();
+    }
+    get miliseconds() {
+      return this.getMilliseconds();
+    }
     toDate() {
-      const pojo = this.toPojo();
+      const pojo = this.pojo;
       return new Date(
         pojo.years,
         pojo.months - 1,
@@ -102,16 +123,16 @@ var pojodate = (() => {
       );
     }
     add(pojo) {
-      return new _PojoDate(add(this.toPojo(), pojo));
+      return new _PojoDate(add(this.pojo, pojo));
     }
     set(pojo) {
-      return new _PojoDate(set(this.toPojo(), pojo));
+      return new _PojoDate(set(this.pojo, pojo));
     }
     format(formatter) {
-      return format(this.toPojo(), formatter);
+      return format(this.pojo, formatter);
     }
     formatIso(parts = "full") {
-      return formatIso(this.toPojo(), parts);
+      return formatIso(this.pojo, parts);
     }
   };
   var pojodate_default = PojoDate;
