@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import { formatSignificant } from "./pojo";
-import PojoDate from "./pojodate";
+import { formatSignificant } from "../src/pojo";
+import PojoDate from "../src/pojodate";
 
 // Jaga
 // Buniek
