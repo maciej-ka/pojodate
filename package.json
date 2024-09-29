@@ -5,7 +5,7 @@
   "main": "dist/pojodate.js",
   "types": "dist/pojodate.d.ts",
   "scripts": {
-    "build": "rm -rf ./dist && tsc && esbuild src/pojodate.ts --bundle --format=iife --global-name=PojoDate --outfile=playground/pojodate.bundle.js",
+    "build": "rm -rf ./dist && tsc && esbuild src/pojodate.ts --bundle --format=iife --global-name=pojodate --outfile=playground/pojodate.bundle.js",
     "test": "vitest run",
     "playground": "http-server ./playground/"
   },
