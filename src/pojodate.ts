@@ -32,7 +32,7 @@ class PojoDate extends Date {
     }
   }
 
-  toPojo(): Pojo {
+  get pojo(): Pojo {
     return {
       years: this.getFullYear(),
       months: this.getMonth() + 1,
@@ -45,7 +45,7 @@ class PojoDate extends Date {
   }
 
   toDate(): Date {
-    const pojo = this.toPojo();
+    const pojo = this.pojo;
     return new Date(
       pojo.years,
       pojo.months - 1,
@@ -58,21 +58,21 @@ class PojoDate extends Date {
   }
 
   add(pojo: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): PojoDate {
-    return new PojoDate(add(this.toPojo(), pojo));
+    return new PojoDate(add(this.pojo, pojo));
   }
 
   set(pojo: Partial<Pojo> | ((current: Pojo) => Partial<Pojo>)): PojoDate {
-    return new PojoDate(set(this.toPojo(), pojo));
+    return new PojoDate(set(this.pojo, pojo));
   }
 
   format(
     formatter: (current: { [K in keyof Pojo]: string }) => string
   ): string {
-    return format(this.toPojo(), formatter);
+    return format(this.pojo, formatter);
   }
 
   formatIso(parts: "full" | "date" | "time" = "full"): string {
-    return formatIso(this.toPojo(), parts);
+    return formatIso(this.pojo, parts);
   }
 }
 

@@ -32,7 +32,7 @@ describe("constructor", () => {
 
 describe("get pojo", () => {
   it("on correct date", () => {
-    const actual = new PojoDate("2020-02-23 14:59:00:200").toPojo();
+    const actual = new PojoDate("2020-02-23 14:59:00:200").pojo;
     expect(actual).toEqual({
       years: 2020,
       months: 2,
