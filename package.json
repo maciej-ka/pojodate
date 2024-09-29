@@ -1,6 +1,6 @@
 {
   "name": "pojodate",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha",
   "description": "JS Date library made for developer experience",
   "main": "pojodate.js",
   "scripts": {
