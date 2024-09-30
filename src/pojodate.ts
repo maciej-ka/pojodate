@@ -95,8 +95,8 @@ class PojoDate extends Date {
     return formatter(args);
   }
 
-  formatIso(parts: "full" | "date" | "time" = "full"): string {
-    return formatIso(this.pojo, parts);
+  formatIso(part: "full" | "date" | "time" = "full"): string {
+    return formatIso(this.pojo, part);
   }
 }
 

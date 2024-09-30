@@ -67,11 +67,9 @@ export function format(
 // prettier-ignore
 export function formatIso(
   pojo: Pojo,
-  parts: "full" | "date" | "time" = "full"
+  part: "full" | "date" | "time" = "full"
 ): string {
-  if (parts === "full") return format(pojo, (d) => `${d.years}-${d.months}-${d.days} ${d.hours}:${d.minutes}:${d.seconds}`);
-  if (parts === "date") return format(pojo, (d) => `${d.years}-${d.months}-${d.days}`);
-  return format(pojo, (d) => `${d.hours}:${d.minutes}:${d.seconds}`);
+  return format(pojo, ({ iso }) => iso[part]);
 }
 
 export function formatSignificant(
