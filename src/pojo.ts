@@ -35,10 +35,10 @@ export function set(
   };
 }
 
-export type formatterArgument = { [K in keyof Pojo]: string } | { num: Pojo }
+export type PojoFormatterArg = { [K in keyof Pojo]: string } & { num: Pojo }
 export function format(
   pojo: Pojo,
-  formatter: (argument: formatterArgument) => string
+  formatter: (argument: PojoFormatterArg) => string
 ): string {
   const pad = (arg: number) => arg.toString().padStart(2, "0");
   const padded = {

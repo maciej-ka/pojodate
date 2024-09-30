@@ -1,4 +1,5 @@
-import { Pojo, add, format, formatIso, formatterArgument, set } from './pojo';
+import { Pojo, add, format, formatIso, PojoFormatterArg, set } from './pojo';
+type PojoDateFormatterArg = PojoFormatterArg & { long: { month: string, weekday: string }, short: { month: string, weekday: string } }
 
 class PojoDate extends Date {
   // standard Date constructors
@@ -72,8 +73,22 @@ class PojoDate extends Date {
     return new PojoDate(set(this.pojo, pojo));
   }
 
-  format(formatter: (argument: formatterArgument) => string): string {
-    return format(this.pojo, formatter);
+  format(formatter: (argument: PojoDateFormatterArg) => string): string {
+    let stdArgs: PojoFormatterArg;
+    format(this.pojo, (args) => { stdArgs = args; return "" })
+    const date = this;
+    const args: PojoDateFormatterArg = {
+      ...stdArgs,
+      long: {
+        get month() { return date.toLocaleString('default', { month: 'long' }) },
+        get weekday() { return date.toLocaleString('default', { weekday: 'long' }) },
+      },
+      short: {
+        get month() { return date.toLocaleString('default', { month: 'short' }) },
+        get weekday() { return date.toLocaleString('default', { weekday: 'short' }) },
+      }
+    }
+    return formatter(args);
   }
 
   formatIso(parts: "full" | "date" | "time" = "full"): string {
