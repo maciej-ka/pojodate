@@ -45,20 +45,30 @@ var pojodate = (() => {
   }
   function format(pojo, formatter) {
     const pad = (arg) => arg.toString().padStart(2, "0");
-    return formatter({
+    const padded = {
       years: pojo.years.toString(),
       months: pad(pojo.months),
       days: pad(pojo.days),
       hours: pad(pojo.hours),
       minutes: pad(pojo.minutes),
       seconds: pad(pojo.seconds),
-      miliseconds: pojo.miliseconds.toString()
+      miliseconds: pojo.miliseconds.toString().padStart(3, "0")
+    };
+    const iso = {
+      date: `${padded.years}-${padded.months}-${padded.days}`,
+      time: `${padded.hours}:${padded.minutes}:${padded.seconds}`
+    };
+    return formatter({
+      ...padded,
+      iso: {
+        ...iso,
+        full: iso.date + " " + iso.time
+      },
+      num: pojo
     });
   }
-  function formatIso(pojo, parts = "full") {
-    if (parts === "full") return format(pojo, (d) => `${d.years}-${d.months}-${d.days} ${d.hours}:${d.minutes}:${d.seconds}`);
-    if (parts === "date") return format(pojo, (d) => `${d.years}-${d.months}-${d.days}`);
-    return format(pojo, (d) => `${d.hours}:${d.minutes}:${d.seconds}`);
+  function formatIso(pojo, part = "full") {
+    return format(pojo, ({ iso }) => iso[part]);
   }
 
   // src/pojodate.ts
@@ -129,10 +139,35 @@ var pojodate = (() => {
       return new _PojoDate(set(this.pojo, pojo));
     }
     format(formatter) {
-      return format(this.pojo, formatter);
+      let stdArgs;
+      format(this.pojo, (args2) => {
+        stdArgs = args2;
+        return "";
+      });
+      const date = this;
+      const args = {
+        ...stdArgs,
+        long: {
+          get month() {
+            return date.toLocaleString("default", { month: "long" });
+          },
+          get weekday() {
+            return date.toLocaleString("default", { weekday: "long" });
+          }
+        },
+        short: {
+          get month() {
+            return date.toLocaleString("default", { month: "short" });
+          },
+          get weekday() {
+            return date.toLocaleString("default", { weekday: "short" });
+          }
+        }
+      };
+      return formatter(args);
     }
-    formatIso(parts = "full") {
-      return formatIso(this.pojo, parts);
+    formatIso(part = "full") {
+      return formatIso(this.pojo, part);
     }
   };
   var pojodate_default = PojoDate;
