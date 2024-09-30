@@ -47,7 +47,7 @@ export function format(
     hours: pad(pojo.hours),
     minutes: pad(pojo.minutes),
     seconds: pad(pojo.seconds),
-    miliseconds: pojo.miliseconds.toString(),
+    miliseconds: pojo.miliseconds.toString().padStart(3, "0"),
   });
 }
 

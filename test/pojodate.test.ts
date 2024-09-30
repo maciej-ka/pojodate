@@ -91,10 +91,10 @@ describe("set", () => {
 });
 
 describe("format", () => {
-  it("default", () => {
-    const date = new PojoDate("2017-09-02 15:20:00");
-    const actual = date.format((d) => `${d.days},${d.months},${d.years}`);
-    expect(actual).toEqual("02,09,2017");
+  it("padded", () => {
+    const date = new PojoDate("2017-09-02 15:20:05.030");
+    const actual = date.format((d) => `${d.years},${d.months},${d.days},${d.hours},${d.minutes},${d.seconds},${d.miliseconds}`);
+    expect(actual).toEqual("2017,09,02,15,20,05,030");
   });
 
   it("iso", () => {
