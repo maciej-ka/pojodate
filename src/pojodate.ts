@@ -1,5 +1,9 @@
 import { Pojo, add, format, formatIso, PojoFormatterArg, set } from './pojo';
-type PojoDateFormatterArg = PojoFormatterArg & { long: { month: string, weekday: string }, short: { month: string, weekday: string } }
+
+type PojoDateFormatterArg = PojoFormatterArg & {
+  long: { month: string; weekday: string };
+  short: { month: string; weekday: string };
+};
 
 class PojoDate extends Date {
   // standard Date constructors

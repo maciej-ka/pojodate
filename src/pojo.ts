@@ -35,7 +35,7 @@ export function set(
   };
 }
 
-export type PojoFormatterArg = { [K in keyof Pojo]: string } & { num: Pojo }
+export type PojoFormatterArg = { [K in keyof Pojo]: string } & { num: Pojo };
 export function format(
   pojo: Pojo,
   formatter: (argument: PojoFormatterArg) => string
@@ -49,10 +49,10 @@ export function format(
     minutes: pad(pojo.minutes),
     seconds: pad(pojo.seconds),
     miliseconds: pojo.miliseconds.toString().padStart(3, "0"),
-  }
+  };
   return formatter({
     ...padded,
-    num: pojo
+    num: pojo,
   });
 }
 
