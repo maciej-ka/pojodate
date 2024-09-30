@@ -3,10 +3,10 @@ import { describe, expect, it } from "vitest";
 import { formatSignificant } from "../src/pojo";
 import PojoDate from "../src/pojodate";
 
+// Buniek
 // Gniewo
 // Zu
 // Jaga
-// Buniek
 
 // 2016-01-14 08:39:00
 // 2017-09-02 15:20:00
@@ -113,6 +113,21 @@ describe("format", () => {
     const date = new PojoDate("2020-02-23 14:59:00");
     const actual = date.format(({ short }) => `${short.month},${short.weekday}`);
     expect(actual).toEqual("Feb,Sun")
+  })
+
+  it("iso date", () => {
+    const actual = new PojoDate("2016-01-14 08:39:00").format(({ iso }) => iso.date);
+    expect(actual).toEqual("2016-01-14");
+  })
+
+  it("iso time", () => {
+    const actual = new PojoDate("2024-03-04 19:03:00").format(({ iso }) => iso.time);
+    expect(actual).toEqual("19:03:00");
+  })
+
+  it("iso full", () => {
+    const actual = new PojoDate("2017-09-02 15:20:00").format(({ iso }) => iso.full);
+    expect(actual).toEqual("2017-09-02 15:20:00");
   })
 });
 

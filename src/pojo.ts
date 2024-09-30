@@ -35,7 +35,7 @@ export function set(
   };
 }
 
-export type PojoFormatterArg = { [K in keyof Pojo]: string } & { num: Pojo };
+export type PojoFormatterArg = { [K in keyof Pojo]: string } & { num: Pojo, iso: { date: string, time: string, full: string } };
 export function format(
   pojo: Pojo,
   formatter: (argument: PojoFormatterArg) => string
@@ -50,8 +50,16 @@ export function format(
     seconds: pad(pojo.seconds),
     miliseconds: pojo.miliseconds.toString().padStart(3, "0"),
   };
+  const iso = {
+    date: `${padded.years}-${padded.months}-${padded.days}`,
+    time: `${padded.hours}:${padded.minutes}:${padded.seconds}`,
+  }
   return formatter({
     ...padded,
+    iso: {
+      ...iso,
+      full: iso.date + ' ' + iso.time,
+    },
     num: pojo,
   });
 }
