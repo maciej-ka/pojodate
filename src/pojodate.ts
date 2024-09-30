@@ -1,4 +1,4 @@
-import { Pojo, add, format, formatIso, set } from "./pojo";
+import { Pojo, add, format, formatIso, formatterArgument, set } from './pojo';
 
 class PojoDate extends Date {
   // standard Date constructors
@@ -72,9 +72,7 @@ class PojoDate extends Date {
     return new PojoDate(set(this.pojo, pojo));
   }
 
-  format(
-    formatter: (current: { [K in keyof Pojo]: string }) => string
-  ): string {
+  format(formatter: (argument: formatterArgument) => string): string {
     return format(this.pojo, formatter);
   }
 

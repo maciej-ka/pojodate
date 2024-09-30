@@ -97,12 +97,22 @@ describe("format", () => {
     expect(actual).toEqual("2017,09,02,15,20,05,030");
   });
 
-  it("iso", () => {
+  it("num", () => {
+    const date = new PojoDate("2017-09-02 15:20:05.030");
+    const actual = date.format(({num}) => `${num.years},${num.months},${num.days},${num.hours},${num.minutes},${num.seconds},${num.miliseconds}`);
+    expect(actual).toEqual("2017,9,2,15,20,5,30");
+  })
+});
+
+describe("formatIso", () => {
+  it("works", () => {
     const actual = new PojoDate("2020-02-23 14:59:00").formatIso();
     expect(actual).toEqual("2020-02-23 14:59:00");
   });
+});
 
-  it("formatSignificant", () => {
+describe("formatSignificant", () => {
+  it("works", () => {
     const pojo = {
       years: 0,
       months: 0,

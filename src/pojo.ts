@@ -35,12 +35,13 @@ export function set(
   };
 }
 
+export type formatterArgument = { [K in keyof Pojo]: string } | { num: Pojo }
 export function format(
   pojo: Pojo,
-  formatter: (current: { [K in keyof Pojo]: string }) => string
+  formatter: (argument: formatterArgument) => string
 ): string {
   const pad = (arg: number) => arg.toString().padStart(2, "0");
-  return formatter({
+  const padded = {
     years: pojo.years.toString(),
     months: pad(pojo.months),
     days: pad(pojo.days),
@@ -48,6 +49,10 @@ export function format(
     minutes: pad(pojo.minutes),
     seconds: pad(pojo.seconds),
     miliseconds: pojo.miliseconds.toString().padStart(3, "0"),
+  }
+  return formatter({
+    ...padded,
+    num: pojo
   });
 }
 
